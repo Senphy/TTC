@@ -120,12 +120,19 @@ class puWeightProducer(Module):
 
 # define modules using the syntax 'name = lambda : constructor' to avoid having them loaded when not needed
 
-pufile_mc2016 = "%s/src/PhysicsTools/NanoAODTools/python/postprocessing/data/pileup/pileup_profile_Summer16.root" % os.environ[
+pufile_mc2016 = "%s/src/PhysicsTools/NanoAODTools/python/postprocessing/data/pileup/mcPileupUL2016.root" % os.environ['CMSSW_BASE']
+pufile_data2016_preAPV = "%s/src/PhysicsTools/NanoAODTools/python/postprocessing/data/pileup/PileupHistogram-goldenJSON-13tev-UL2016-preVFP-99bins_withVar.root" % os.environ[
     'CMSSW_BASE']
-pufile_data2016 = "%s/src/PhysicsTools/NanoAODTools/python/postprocessing/data/pileup/PileupData_GoldenJSON_Full2016.root" % os.environ[
+pufile_data2016_postAPV = "%s/src/PhysicsTools/NanoAODTools/python/postprocessing/data/pileup/PileupHistogram-goldenJSON-13tev-UL2016-postVFP-99bins_withVar.root" % os.environ[
     'CMSSW_BASE']
-puWeight_2016 = lambda: puWeightProducer(pufile_mc2016,
-                                         pufile_data2016,
+puWeight_2016_preAPV = lambda: puWeightProducer(pufile_mc2016,
+                                         pufile_data2016_preAPV,
+                                         "pu_mc",
+                                         "pileup",
+                                         verbose=False,
+                                         doSysVar=True)
+puWeight_2016_postAPV = lambda: puWeightProducer(pufile_mc2016,
+                                         pufile_data2016_postAPV,
                                          "pu_mc",
                                          "pileup",
                                          verbose=False,
@@ -146,9 +153,9 @@ puWeight_2017 = lambda: puWeightProducer(pufile_mc2017,
 puAutoWeight_2017 = lambda: puWeightProducer(
     "auto", pufile_data2017, "pu_mc", "pileup", verbose=False)
 
-pufile_data2018 = "%s/src/PhysicsTools/NanoAODTools/python/postprocessing/data/pileup/PileupHistogram-goldenJSON-13tev-2018-100bins_withVar.root" % os.environ[
+pufile_data2018 = "%s/src/PhysicsTools/NanoAODTools/python/postprocessing/data/pileup/PileupHistogram-goldenJSON-13tev-UL2018-99bins_withVar.root" % os.environ[
     'CMSSW_BASE']
-pufile_mc2018 = "%s/src/PhysicsTools/NanoAODTools/python/postprocessing/data/pileup/mcPileup2018.root" % os.environ[
+pufile_mc2018 = "%s/src/PhysicsTools/NanoAODTools/python/postprocessing/data/pileup/mcPileupUL2018.root" % os.environ[
     'CMSSW_BASE']
 puWeight_2018 = lambda: puWeightProducer(pufile_mc2018,
                                          pufile_data2018,
